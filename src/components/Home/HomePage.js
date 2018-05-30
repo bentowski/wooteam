@@ -15,7 +15,8 @@ class HomePage extends React.Component {
     const { navigate } = this.props.navigation;
     return (
       <View>
-        <Text style={styles.title}>React Native WooCommerce Store</Text>
+        <Text style={styles.title}>Wooteam Shop</Text>
+        <Text style={styles.title}>Bienvenue</Text>
         <ScrollView
           horizontal
           scrollEventThrottle={10}
@@ -32,7 +33,7 @@ class HomePage extends React.Component {
             source={{ uri: 'http://wooteam.codeursyonnais.fr/wordpress/wp-content/uploads/2018/05/belt.jpg' }} style={styles.sliderImage}
           />
         </ScrollView>
-        <Button color="#05a5d1" title="SHOP" onPress={() => navigate("Products")} />
+        <Button color="#05a5d1" title="Accès à la boutique" onPress={() => navigate("Products")} />
       </View>
     );
   }
@@ -41,7 +42,8 @@ class HomePage extends React.Component {
 const styles = StyleSheet.create({
   title: {
     fontSize: 22,
-    padding: 10
+    padding: 10,
+    textAlign: 'center'
   },
   sliderImage: {
     height: 360,

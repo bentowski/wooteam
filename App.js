@@ -29,7 +29,7 @@ const DrawerNavigation = createDrawerNavigator({
   Product: {
     screen: Product,
     navigationOptions: ({ navigation }) => ({
-      title: ""
+      title: "Product"
     }),
   },
   CartPage: {
@@ -48,7 +48,7 @@ const StackNavigation = createStackNavigator({
 }, {
     headerMode: 'float',
     navigationOptions: ({ navigation, screenProps }) => ({
-      headerStyle: { backgroundColor: '#4C3E54' },
+      headerStyle: { backgroundColor: 'rgb(64, 115, 158)' },
       headerTintColor: 'white',
       headerLeft: drawerButton(navigation),
       headerRight: cartButton(navigation, screenProps)
@@ -65,7 +65,7 @@ const drawerButton = (navigation) => (
         navigation.navigate('DrawerClose')
       }
     }
-    }><Ionicons name="ios-menu" size={30} /></Text>
+    }><EvilIcons name="arrow-right" size={30} /></Text>
 );
 
 const cartButton = (navigation, screenProps) => (

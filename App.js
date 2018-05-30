@@ -1,23 +1,111 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { Text, Button, Animated, Easing, Image } from "react-native";
+import { createStackNavigator, createDrawerNavigator } from "react-navigation";
+import { Ionicons, EvilIcons } from '@expo/vector-icons';
+import { Provider } from 'react-redux';
+import { connect } from 'react-redux';
 
-export default class App extends React.Component {
+import HomePage from './src/components/Home/HomePage';
+import Products from "./src/components/Products/ProductList";
+import Product from "./src/components/Products/Products";
+import CartPage from './src/components/Cart/CartPage';
+import DrawerContainer from './src/components/Drawer/DrawerContainer';
+import configureStore from './src/store/configureStore';
+import InitialState from './src/reducers/InitialState';
+
+const DrawerNavigation = createDrawerNavigator({
+  Home: {
+    screen: HomePage,
+    navigationOptions: {
+      title: "RN WC Store"
+    }
+  },
+  Products: {
+    screen: Products,
+    navigationOptions: {
+      title: "Shop"
+    }
+  },
+  Product: {
+    screen: Product,
+    navigationOptions: ({ navigation }) => ({
+      title: ""
+    }),
+  },
+  CartPage: {
+    screen: CartPage,
+    navigationOptions: {
+      title: "Cart"
+    }
+  }
+}, {
+    contentComponent: DrawerContainer
+  });
+
+
+const StackNavigation = createStackNavigator({
+  DrawerNavigation: { screen: DrawerNavigation }
+}, {
+    headerMode: 'float',
+    navigationOptions: ({ navigation, screenProps }) => ({
+      headerStyle: { backgroundColor: '#4C3E54' },
+      headerTintColor: 'white',
+      headerLeft: drawerButton(navigation),
+      headerRight: cartButton(navigation, screenProps)
+    })
+  });
+
+const drawerButton = (navigation) => (
+  <Text
+    style={{ padding: 15, color: 'white' }}
+    onPress={() => {
+      if (navigation.state.index === 0) {
+        navigation.navigate('DrawerOpen')
+      } else {
+        navigation.navigate('DrawerClose')
+      }
+    }
+    }><Ionicons name="ios-menu" size={30} /></Text>
+);
+
+const cartButton = (navigation, screenProps) => (
+  <Text style={{ padding: 15, color: 'white' }}
+    onPress={() => { navigation.navigate('CartPage') }}
+  >
+    <EvilIcons name="cart" size={30} />
+    {screenProps.cartCount}
+  </Text>
+);
+
+class CA extends React.Component {
   render() {
+    const cart = {
+      cartCount: this.props.cart.length
+    }
     return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
-      </View>
+      <StackNavigation screenProps={cart} />
     );
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+function mapStateToProps(state) {
+  return {
+    cart: state.cart
+  };
+}
+
+const ConnectedApp = connect(mapStateToProps, null)(CA);
+
+const store = configureStore();
+
+class App extends React.Component {
+  render() {
+    return (
+      <Provider store={store}>
+        <ConnectedApp />
+      </Provider>
+    )
+  }
+}
+
+export default App;

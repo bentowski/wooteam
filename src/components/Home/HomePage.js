@@ -15,8 +15,6 @@ class HomePage extends React.Component {
     const { navigate } = this.props.navigation;
     return (
       <View>
-        <Text style={styles.title}>Wooteam Shop</Text>
-        <Text style={styles.title}>Bienvenue</Text>
         <ScrollView
           horizontal
           scrollEventThrottle={10}
@@ -34,6 +32,8 @@ class HomePage extends React.Component {
           />
         </ScrollView>
         <Button color="#05a5d1" title="Accès à la boutique" onPress={() => navigate("Products")} />
+        <Button color="#05a5d1" title="SignUp" onPress={() => navigate("SignUp")} />
+        <Button color="#05a5d1" title="SignIn" onPress={() => navigate("SignIn")} />
       </View>
     );
   }

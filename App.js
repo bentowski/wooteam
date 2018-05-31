@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import HomePage from './src/components/Home/HomePage';
 import Products from "./src/components/Products/ProductList";
 import Product from "./src/components/Products/Products";
+import SignIn from "./src/components/SignIn/SignIn";
 import CartPage from './src/components/Cart/CartPage';
 import DrawerContainer from './src/components/Drawer/DrawerContainer';
 import configureStore from './src/store/configureStore';
@@ -24,6 +25,12 @@ const DrawerNavigation = createDrawerNavigator({
     screen: Products,
     navigationOptions: {
       title: "Shop"
+    }
+  },
+  SignIn: {
+    screen: SignIn,
+    navigationOptions: {
+      title: "SignIn"
     }
   },
   Product: {

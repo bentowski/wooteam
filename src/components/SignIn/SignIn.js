@@ -19,9 +19,9 @@ class SignIn extends React.Component {
           }
         }
         Alert.alert("Username / Password is not valid");
-      }   
+      }
       render() {
-      return( 
+      return(
         <View>
           <TextInput onChangeText={(username) => {
             this.setState({username})}} />
@@ -29,7 +29,7 @@ class SignIn extends React.Component {
             this.setState({password})}} />
           <Button color="#05a5d1" title="SignIn"
           onPress={this.login} />
-           
+
         </View>
       );
     }

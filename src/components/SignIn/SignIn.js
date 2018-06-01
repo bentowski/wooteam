@@ -22,10 +22,10 @@ class SignIn extends React.Component {
       }
       render() {
       return(
-        <View>
-          <TextInput onChangeText={(username) => {
+        <View style={display:flex, flexDirection: column, justifyContent:spaceAround}>
+          <TextInput placeholder="pseudo" onChangeText={(username) => {
             this.setState({username})}} />
-          <TextInput onChangeText={(password) => {
+          <TextInput placeholder="mot de passe" onChangeText={(password) => {
             this.setState({password})}} />
           <Button color="#05a5d1" title="SignIn"
           onPress={this.login} />
